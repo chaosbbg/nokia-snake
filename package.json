@@ -1,0 +1,16 @@
+{
+  "name": "nokia-snake-rewards",
+  "version": "1.0.0",
+  "description": "Nokia-style snake with a holder-gated, replay-verified hourly leaderboard for a StonkFun token",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node --experimental-sqlite --disable-warning=ExperimentalWarning server/index.js",
+    "dev": "node --experimental-sqlite --disable-warning=ExperimentalWarning --watch server/index.js",
+    "test": "node --experimental-sqlite --disable-warning=ExperimentalWarning --test test/*.test.js"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "license": "MIT"
+}

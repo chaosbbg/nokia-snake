@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Nokia Snake</title>
+  <meta name="description" content="Classic Nokia Snake. Hold the token, top the hourly leaderboard, win prizes." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23c7f0d8'/%3E%3Cpath d='M2 11h9V5h3' stroke='%2343523d' stroke-width='2' fill='none'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main class="layout">
+    <!-- The phone -->
+    <section class="phone" aria-label="Game">
+      <div class="brand">NOKIA</div>
+      <div class="bezel">
+        <div class="lcd">
+          <canvas id="lcd" width="84" height="48" aria-label="Snake game screen"></canvas>
+        </div>
+      </div>
+      <div class="softkeys">
+        <button class="soft" data-key="menu" aria-label="Menu">Menu</button>
+        <button class="soft" data-key="sound" aria-label="Toggle sound">Sound</button>
+      </div>
+      <div class="keypad" id="keypad">
+        <button data-key="1"><b>1</b><i>&nbsp;</i></button>
+        <button data-key="2" class="dir"><b>2</b><i>▲</i></button>
+        <button data-key="3"><b>3</b><i>def</i></button>
+        <button data-key="4" class="dir"><b>4</b><i>◀</i></button>
+        <button data-key="5" class="ok"><b>5</b><i>OK</i></button>
+        <button data-key="6" class="dir"><b>6</b><i>▶</i></button>
+        <button data-key="7"><b>7</b><i>pqrs</i></button>
+        <button data-key="8" class="dir"><b>8</b><i>▼</i></button>
+        <button data-key="9"><b>9</b><i>wxyz</i></button>
+        <button data-key="*"><b>*</b><i>+</i></button>
+        <button data-key="0"><b>0</b><i>pause</i></button>
+        <button data-key="#"><b>#</b><i>&nbsp;</i></button>
+      </div>
+      <p class="hint">Arrows / WASD / 2-4-6-8 to steer · Enter or 5 to start · P to pause · swipe on the screen</p>
+    </section>
+
+    <!-- Side panel -->
+    <section class="panel">
+      <header>
+        <h1>SNAKE <span id="sym">$SNAKE</span></h1>
+        <p class="tag">Hold the token. Top the hourly board. Win from the prize vault.</p>
+      </header>
+
+      <div class="card" id="wallet-card">
+        <div class="row">
+          <span class="label">Wallet</span>
+          <span id="wallet-status" class="muted">Not connected</span>
+        </div>
+        <div id="holder-row" class="row hidden">
+          <span class="label">Holding</span>
+          <span id="holding"></span>
+        </div>
+        <div id="mode-row" class="row">
+          <span class="label">Mode</span>
+          <span id="mode" class="pill">Practice</span>
+        </div>
+        <div class="actions">
+          <button id="connect" class="btn primary">Connect wallet</button>
+          <a id="buy" class="btn" target="_blank" rel="noopener">Buy on StonkFun</a>
+        </div>
+        <p id="wallet-msg" class="msg"></p>
+      </div>
+
+      <div class="card">
+        <div class="row">
+          <h2>This hour</h2>
+          <span class="countdown" id="countdown"></span>
+        </div>
+        <p class="prizes" id="prizes"></p>
+        <ol class="board" id="board"><li class="muted">Loading…</li></ol>
+        <p class="muted small" id="me-line"></p>
+      </div>
+
+      <div class="card hidden" id="vault-card">
+        <div class="row">
+          <h2>Prize vault</h2>
+          <a class="muted small-link" id="vault-link" target="_blank" rel="noopener">View on Solscan ↗</a>
+        </div>
+        <p class="vault-bal" id="vault-bal">—</p>
+        <div class="addr-row">
+          <code id="vault-addr"></code>
+          <button class="copy" data-copy-target="vault-addr">Copy</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Past rounds</h2>
+        <p class="muted small">Winners of each finished hour (last 24h). Prizes are sent by hand from the vault.</p>
+        <div id="rounds"><p class="muted">No finished rounds yet.</p></div>
+      </div>
+
+      <details class="card rules">
+        <summary>How rewards work</summary>
+        <ul>
+          <li>Connect a Solana wallet that holds at least <b id="min-hold">—</b> <span class="sym2"></span>. Signing in is a free message signature — no transaction.</li>
+          <li>Every ranked game is replayed on the server move-by-move, so only real scores count.</li>
+          <li>Every hour, on the hour, the board closes and a fresh one starts. The top players of each hour are listed under Past rounds and paid from the prize vault.</li>
+          <li>Keep holding until you are paid — winners who have sold by payout time can be skipped.</li>
+          <li>Not holding? You can still play practice games.</li>
+        </ul>
+      </details>
+    </section>
+  </main>
+  <script type="module" src="/game.js"></script>
+</body>
+</html>
